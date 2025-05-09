@@ -1,0 +1,35 @@
+@if(isLoading) {
+  <div class="loader-wrapper">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+}
+
+@else if(!isLoading && isPrivacyOrImprintPage()) {
+  <div>
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}
+
+@else if(!isLoading && !isLoggedIn && newUser) {
+  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
+}
+
+@else if (!isLoading && !isLoggedIn && !newUser) {
+  <app-log-in
+    (loginSuccess)="onLoginSuccess()"
+    (newUserOutput)="goToSignUp()"
+  ></app-log-in>
+} 
+ 
+@else {
+  <div class="main-component_wrapper">
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}

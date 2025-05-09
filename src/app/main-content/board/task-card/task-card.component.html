@@ -1,0 +1,44 @@
+<div class="card">
+    <span class="category" [ngStyle]="{'background-color': item.category === 'Technical Task' ? '#1FD7C1' : '#0038FF'}">{{item.category}}</span>
+    <p class="title">{{item.title}}</p>
+    <p class="description">{{item.description}}</p>
+    <div class="subtasks">
+        @if(item.subtasks) {
+            @if (item.subtasks.length !== 0) {
+                <div class="progress_bar">
+                    <div class="progress" [ngStyle]="{'width': getCompletedPercentage() + '%'}"></div>
+                </div>
+                <p>{{completedSubtasks}}/{{item.subtasks.length}} Subtasks</p>
+            }
+        }
+    </div>
+    <div class="content_wrapper">
+        <div class="assigned_to">
+            @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
+                @for (contact of fullOrderedContactList; let i = $index; track i) { 
+                    @for (userId of item.assignedToUserId; track $index){                                                         
+                        @if(contact.id === userId && $index < 3) {                              
+                            <div class="avatar" [ngStyle]="{'background-color': contact.color}">
+                                <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                            </div>                              
+                        }   
+                        @if (contact.id === userId && $index === 3) {
+                            <div class="more_contacts">
+                                <p>+ {{item.assignedToUserId.length - 2}} weitere</p>
+                            </div>
+                        }                   
+                    }
+                }
+            }
+        </div>
+        <div class="priority">
+            @if (item.priority === "urgent") {
+                <img src="./assets/tasks/Prio alta.svg" alt="">
+            } @else if(item.priority === "medium") {
+                <img src="./assets/tasks/Prio media.svg" alt="">
+            } @else if(item.priority === "low") {
+                <img src="./assets/tasks/Prio baja.svg" alt="">
+            }
+        </div>
+    </div>
+</div>

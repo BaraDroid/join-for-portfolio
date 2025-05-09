@@ -1,0 +1,55 @@
+<div class="container">
+    <nav class="sidebar">
+        <div class="logo"><img src="assets/sidebar/logo.svg" alt=""></div>
+        <div class="menu" *ngIf="!shouldHideMenu()">
+            <div class="menu-item-wrapper" *ngFor="let item of menuItems; let i = index"
+                [class.active]="selectedIndex === i" (click)="setActive(i)">
+                <a [routerLink]="item.link" [fragment]="item.fragment" class="menu-link">
+                    <div class="menu-item">
+                        <img [src]="item.icon" alt="">
+                        <span>{{ item.label }}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="menu-item-wrapper">
+            <div *ngIf="shouldHideMenu()" class="menu-item">
+                <img src="assets/login/login.svg" alt="">
+                <a href="/" class="login-link" (click)="logout()">Login</a>
+            </div>
+        </div>
+
+        <div class="legal-position">
+            <a [routerLink]="['/privacy-policy']" routerLinkActive="active-link" class="privacy-policy">Privacy Policy</a>
+            <a [routerLink]="['/imprint']" routerLinkActive="active-link" class="imprint">Legal notice</a>
+        </div>
+    </nav>
+</div>
+
+
+<div class="mobile">
+    <nav>
+        <div *ngIf="!shouldHideMenu()">
+            <div *ngFor="let item of menuItems; let i = index"
+                [class.active]="selectedMobileIndex === i"
+                (click)="setMobileActive(i)">
+                <div id="menu-item-mobile-login" class="menu-item-mobile-login" [routerLink]="item.link" [fragment]="item.fragment">
+                    <img [src]="item.icon" alt="">
+                    <span>{{ item.label }}</span>
+                </div>
+            </div>
+        </div>
+   
+       
+        <div *ngIf="shouldHideMenu()" class="menu-item-mobile">
+            <div class="login-position-mobile">
+                <img src="assets/login/login.svg" alt="">
+                <a href="/" class="login-link">Login</a>
+            </div>
+            <div class="legal-position-mobile">
+                <a [routerLink]="['/privacy-policy']" routerLinkActive="active-link" class="privacy-policy">Privacy Policy</a>
+                <a [routerLink]="['/imprint']" routerLinkActive="active-link" class="imprint">Legal notice</a>
+            </div>
+        </div>
+    </nav>
+</div>
