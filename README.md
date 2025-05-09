@@ -1,3 +1,5 @@
+I had some minor difficulties integrating my own database. The error occurred during cloning, so I decided to download our team project, which worked well afterwards. For previous processes and commits, please refer to my previous repositories with this project. Thank you for your understanding.
+
 # join
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
